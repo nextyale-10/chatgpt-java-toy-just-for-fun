@@ -2,7 +2,7 @@ server:
   port: 80
 
 chatgpt:
-  authorization: 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
+  authorization:
   model: gpt-3.5-turbo
   url: https://api.openai.com/v1/chat/completions
 
