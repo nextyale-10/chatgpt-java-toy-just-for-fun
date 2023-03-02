@@ -49,7 +49,7 @@ public class CommunicationServiceImpl implements CommunicationService {
         }
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost(url);
-        post.addHeader("Content-Type","application/json; charset=uft-8");
+        post.addHeader("Content-Type","application/json;charset=uft-8");
         post.addHeader("Authorization","Bearer "+key);
         promptBody.getMessages().add(new Message(Const.ROLE_USER,msg.getMessage()));
         for (Message m : promptBody.getMessages()) {
@@ -57,7 +57,7 @@ public class CommunicationServiceImpl implements CommunicationService {
         }
 
         try {
-            StringEntity s = new StringEntity(JSON.toJSONString(promptBody));
+            StringEntity s = new StringEntity(JSON.toJSONString(promptBody),"UTF-8");
 
             post.setEntity(s);
             HttpResponse resp = httpClient.execute(post);
