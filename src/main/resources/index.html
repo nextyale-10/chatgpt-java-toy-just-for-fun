@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link href="favicon.ico" rel="shortcut icon">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+<div id="app" >
+    <el-input
+            type="textarea"
+            autosize
+            placeholder="APIKEY（若无，可空）"
+            v-model="textarea1">
+    </el-input>
+    <div style="margin: 20px 0;"></div>
+    <el-input
+            type="textarea"
+            :autosize="{ minRows: 2, maxRows: 4}"
+            placeholder="请输入问题（目前只能用英文）"
+            v-model="textarea2">
+    </el-input>
+    <div style="margin: 10px 0;"></div>
+
+    <el-button type="primary" @click="submit">发送</el-button>
+
+    <div style="margin: 40px 0;"></div>
+    <el-input
+            type="textarea"
+            :autosize="{ minRows: 2, maxRows: 4}"
+            placeholder="回答区（回答可以用中文： 比如 from now on, answer me in Chinese）"
+            v-model="textarea3">
+    </el-input>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data(){
+            return {
+                textarea1: '',
+                textarea2: '',
+                textarea3: ''
+            }
+        },
+        methods:{
+            submit(){
+
+                var _this = this;
+                axios.post('/talkTo',{
+
+                    headers: {'Content-Type': 'application/json'},
+                    apiKey: this.textarea1,
+                    message: this.textarea2,
+
+                }).then(function (resp){
+                    if(resp.data.code==0){
+                        console.log("something wrong");
+                        return
+                    }
+                    let all = '';
+
+                    console.log(resp.data.content.choices[0].message.content)
+                    let choices = resp.data.content.choices
+
+
+                    _this.textarea3=choices[0].message.content;
+
+                })
+
+            }
+        }
+        })
+</script>
+</body>
+</html>
