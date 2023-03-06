@@ -68,7 +68,7 @@ public class CommunicationServiceImpl implements CommunicationService {
 
             return new Result(1,"ok", oar);
         } catch (IOException e) {
-
+            e.printStackTrace();
             return new Result(0,"error",null);
         }
     }
