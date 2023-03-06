@@ -2,7 +2,7 @@ server:
   port: 80
 
 chatgpt:
-  authorization: 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
+  authorization:
   model: gpt-3.5-turbo
   url: http://{your server ip}/v1/chat/completions # your proxy server
   port: 80
