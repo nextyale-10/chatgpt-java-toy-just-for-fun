@@ -4,8 +4,8 @@ server:
 chatgpt:
   authorization:
   model: gpt-3.5-turbo
-  url: http://{your server ip}/v1/chat/completions # your proxy server
-  port: 80
+  url: http://{your server ip}/v1/chat/completions # your proxy server or just original url https://api.openai.com/v1/chat/completions
+  port: 80 # proxy port, not used in code yet
 
 
 
