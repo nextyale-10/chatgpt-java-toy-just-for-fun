@@ -5,6 +5,7 @@ import com.botwhy.chatgptland.pojo.PromptBody;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class BeanConfig {
     private String model;
 
     @Bean
+    @SessionScope
     public PromptBody promptBody(){
         List<Message> messages = new ArrayList<>();
         messages.add(new Message(Const.ROLE_SYSTEM,"You are a helpful assistant."));
