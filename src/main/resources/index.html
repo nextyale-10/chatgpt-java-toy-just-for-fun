@@ -8,7 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <link href="favicon.ico" rel="shortcut icon">
     <!-- 引入组件库 -->
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
@@ -24,18 +23,18 @@
     <el-input
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 4}"
-            placeholder="请输入问题（目前只能用英文）"
+            placeholder="请输入问题"
             v-model="textarea2">
     </el-input>
     <div style="margin: 10px 0;"></div>
 
-    <el-button type="primary" @click="submit">发送</el-button>
+    <el-button type="primary" @click="submit" :loading=loading>发送</el-button>
 
     <div style="margin: 40px 0;"></div>
     <el-input
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 4}"
-            placeholder="回答区（回答可以用中文： 比如 from now on, answer me in Chinese）"
+            placeholder="回答区"
             v-model="textarea3">
     </el-input>
 </div>
@@ -46,12 +45,13 @@
             return {
                 textarea1: '',
                 textarea2: '',
-                textarea3: ''
+                textarea3: '',
+                loading: false
             }
         },
         methods:{
             submit(){
-
+                this.loading = true
                 var _this = this;
                 axios.post('/talkTo',{
 
@@ -71,6 +71,7 @@
 
 
                     _this.textarea3=choices[0].message.content;
+                    _this.loading = false
 
                 })
 
